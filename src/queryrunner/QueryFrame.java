@@ -230,7 +230,7 @@ public class QueryFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         boolean  bOK=true; 
-        jTextArea2.setText("");      
+        jTextArea2.setText("");
         
         if (jConnectButton.getText() == "Connect")
         {            
@@ -278,8 +278,8 @@ public class QueryFrame extends javax.swing.JFrame {
         String szQuery = m_queryrunner.GetQueryText(m_queryChoice);
         this.jTextArea1.setText(szQuery);
         System.out.println("choice is " + szChoice);
-        this.jPanel2.setVisible(false);        
-         
+        this.jPanel2.setVisible(false);
+
         if (this.m_queryrunner.isParameterQuery(m_queryChoice))
         {           
             this.jPanel1.setVisible(true);                        
@@ -328,7 +328,21 @@ public class QueryFrame extends javax.swing.JFrame {
         String [][] allData;        
 
         boolean  bOK = true;
-        
+
+        // add description of select query in the output box
+        this.jTextArea2.setText("Q1, list top 10 properties based on input states\n" +
+                                "Q2, Input deal status, closed or open returns average base salary, commission % and average commission of managers and realtors. \n" +
+                                "Q3, Input employee id and date, Show appointments \n" +
+                                "Q4, Property with max sold price \n" +
+                                "Q5, Property with min sold price \n" +
+                                "Q6, Show open deals of input property \n" +
+                                "Q7, Show sellers that have listed more than two properties \n" +
+                                "Q8, Salary information of current and past managers and realtors \n" +
+                                "Q9, Our customer age range \n" +
+                                "Q10, Input # of properties, returns states with more listed properties and average price \n" +
+                                "Q11, Average price of properties based on number of bedrooms \n" +
+                                "Q12, Top 3 employees ranked by total amount of sales");
+
         if (this.m_queryrunner.isParameterQuery(m_queryChoice))
         {
             parmstring = new String [nAmt];
