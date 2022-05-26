@@ -43,12 +43,13 @@ public class QueryRunner {
         //    IsItActionQuery (e.g. Mark it true if it is, otherwise false)
         //    IsItParameterQuery (e.g.Mark it true if it is, otherwise false)
         
-        //m_queryArray.add(new QueryData("Select * from contact", null, null, false, false));   // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        //m_queryArray.add(new QueryData("Select * from contact where contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},  false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        //m_queryArray.add(new QueryData("Select * from contact where contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean [] {true}, false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        //m_queryArray.add(new QueryData("insert into contact (contact_id, contact_name, contact_salary) values (?,?,?)",new String [] {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean [] {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        // m_queryArray.add(new QueryData("Select * from contact", null, null, false, false));   // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        // m_queryArray.add(new QueryData("Select * from contact where contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},  false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        // m_queryArray.add(new QueryData("Select * from contact where contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean [] {true}, false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        // m_queryArray.add(new QueryData("insert into contact (contact_id, contact_name, contact_salary) values (?,?,?)",new String [] {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean [] {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR APPLICATION
         
-        // Query 1  where STATE_NAME, we only have IA, WA, MT, OR, SD, ID, ND
+        // Query 1  where STATE_NAME = "WA" or "OR"
+        // IA, WA, MT, OR, SD, ID, ND
         // Lists top 10 (based on price) properties in WA and OR states
         m_queryArray.add(new QueryData("SELECT A.ADDR_STR AS 'Street Address', A.ADDR_CITY AS 'City', A.ADDR_STATE AS 'State', A.ADDR_ZIP AS 'Zipcode', \n" +
                 "P.PROP_BED AS 'Bedrooms', P.PROP_BATH AS 'Bathrooms', P.PROP_TARGET_PRICE AS 'Property Price'\n" +
@@ -80,7 +81,7 @@ public class QueryRunner {
                 "ORDER BY PS.POS_TYPE;",new String [] {"DEAL_STATUS"},new boolean [] {false},false,true));
 
         // Query 3  where EMPLOYEE_ID = 24 and APPOINTMENT_DATE = "2022-05-16"
-        // employee id ranges from 1-500,
+        // Employee id ranges 1-500
         // Show appointments for a given date for a given employee
         m_queryArray.add(new QueryData("SELECT APP_DATE, P.PERS_FNAME AS 'CUSTOMER_FNAME', \n" +
                 "P.PERS_LNAME AS 'CUSTOMER_LNAME', P.PERS_PHONE AS 'CUSTOMER_PHONE',\n" +
@@ -142,7 +143,7 @@ public class QueryRunner {
                 "JOIN ADDRESS USING (ADDR_ID);",null,null,false,false));
 
         // Query 6  where PROPERTY_ID = 280
-        // property id ranges from 101-850
+        // property id ranges 101-850
         // Show open deals for a given property sorted by price
         m_queryArray.add(new QueryData("SELECT LATEST_DEALS.DEAL_ID, P.PROP_ID, PRIC_PRICE, DEAL_STATUS, DEAL_INSPECTION, \n" +
                 "DEAL_FINANCING, PERSON.PERS_FNAME, PERSON.PERS_LNAME, PERSON.PERS_PHONE\n" +
