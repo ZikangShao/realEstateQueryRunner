@@ -442,9 +442,18 @@ public class QueryRunner {
                                 parmstrings = new String [queryParamAmount];
                                 for (int i = 0; i < queryParamAmount; i++)
                                 {
-                                    System.out.print("Enter Paramter for " +
-                                            queryrunner.GetParamText(queryChoice, i) + ": ");
-                                    parmstrings[i] = keyboard.nextLine();
+                                    String parameter = queryrunner.GetParamText(queryChoice, i);
+
+                                    System.out.print("Enter Paramter for " + parameter + ": ");
+                                    if (parameter.toLowerCase().contains("date"))
+                                    {
+                                        System.out.println("lololololololo");
+                                        parmstrings[i] = getValidDateInput(keyboard);
+                                    }
+                                    else
+                                    {
+                                        parmstrings[i] = keyboard.nextLine();
+                                    }
                                 }
                             }
                             if (queryrunner.isActionQuery(queryChoice))
@@ -526,5 +535,24 @@ public class QueryRunner {
         }
 
         return queryChoice;
+    }
+
+    public static String getValidDateInput(Scanner scanner)
+    {
+        String userInput = null;
+        boolean done = false;
+        while (!done)
+        {
+            userInput = scanner.nextLine();
+            if (userInput.matches("(\\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"))
+            {
+                done = true;
+            }
+            else
+            {
+                System.out.println("Please enter a date in the format (YYYY-MM-DD)");
+            }
+        }
+        return userInput;
     }
 }
