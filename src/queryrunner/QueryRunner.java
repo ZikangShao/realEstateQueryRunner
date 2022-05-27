@@ -31,7 +31,7 @@ public class QueryRunner {
         
         // You will need to put your Project Application in the below variable
         
-        this.m_projectTeamApplication="EasyRealtor";    // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        this.m_projectTeamApplication="REAL-ESTATE_MANAGEMENT";    // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
         
         // Each row that is added to m_queryArray is a separate query. It does not work on Stored procedure calls.
         // The 'new' Java keyword is a way of initializing the data that will be added to QueryArray. Please do not change
@@ -441,9 +441,131 @@ public class QueryRunner {
                 // NOTE - You can look at the QueryRunner API calls that are in QueryFrame.java for assistance. You should not have to 
                 //    alter any code in QueryJDBC, QueryData, or QueryFrame to make this work.
 //                System.out.println("Please write the non-gui functionality");
-                
+                String hostName, user, password, database;
+                Scanner keyboard = new Scanner(System.in);
+
+                System.out.print("Enter Hostname: ");
+                hostName = keyboard.nextLine();
+                System.out.print("Enter User: ");
+                user = keyboard.nextLine();
+                System.out.print("Enter Password: ");
+                password = keyboard.nextLine();
+                System.out.print("Enter Database: ");
+                database = keyboard.nextLine();
+
+                boolean connected = queryrunner.Connect(hostName, user, password, database);
+                if (connected)
+                {
+                    System.out.println("Connected to DataBase");
+                    while (connected)
+                    {
+                        System.out.println('\n');
+                        int queryChoice = getQueryInput(queryrunner.GetTotalQueries(), keyboard) - 1;
+                        if (queryChoice < 0)
+                        {
+                            queryrunner.Disconnect();
+                            connected = false;
+                        }
+                        else
+                        {
+//                            String query = queryrunner.GetQueryText(queryChoice);
+                            System.out.println( "***************\n" +
+                                                "SELECTED QUERY\n" +
+                                                "***************");
+
+                            System.out.println(queryrunner.GetQueryText(queryChoice));
+                            int queryParamAmount = queryrunner.GetParameterAmtForQuery(queryChoice);
+                            String [] parmstrings = {};
+                            String [] headers;
+                            String [][] allData;
+                            if (queryrunner.isParameterQuery(queryChoice))
+                            {
+                                parmstrings = new String [queryParamAmount];
+                                for (int i = 0; i < queryParamAmount; i++)
+                                {
+                                    System.out.print("Enter Paramter for " +
+                                            queryrunner.GetParamText(queryChoice, i) + ": ");
+                                    parmstrings[i] = keyboard.nextLine();
+                                }
+                            }
+                            if (queryrunner.isActionQuery(queryChoice))
+                            {
+                                boolean result = queryrunner.ExecuteUpdate(queryChoice, parmstrings);
+                                if (result)
+                                {
+                                    System.out.println(("Rows affected : " + queryrunner.GetUpdateAmount()));
+                                }
+                                else
+                                {
+                                    System.out.println(queryrunner.GetError());
+                                }
+                            }
+                            else
+                            {
+                                boolean result = queryrunner.ExecuteQuery(queryChoice, parmstrings);
+                                if (result)
+                                {
+                                    System.out.println( "\n***************\n" +
+                                                        "  QUERY RESULT\n" +
+                                                        "***************");
+
+                                    headers = queryrunner.GetQueryHeaders();
+                                    for (int i = 0; i < headers.length; ++i)
+                                    {
+                                        System.out.printf("%-20s", headers[i]);
+                                    }
+                                    System.out.println();
+
+                                    allData = queryrunner.GetQueryData();
+                                    for (int i = 0; i < allData.length; ++i)
+                                    {
+                                        for (int j = 0; j < allData[i].length; ++j)
+                                        {
+                                            System.out.printf("%-20s", allData[i][j]);
+                                        }
+                                        System.out.println();
+                                    }
+                                }
+
+                                else
+                                {
+                                    System.out.println(queryrunner.GetError());
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    System.out.println("Failed to connect to " + database + " database!");
+                }
+
+                keyboard.close();
+            }
+
+        }
+    }
+
+    public static int getQueryInput(int queryCount, Scanner scanner)
+    {
+        String userInput;
+        int queryChoice = -1;
+        boolean validInput = false;
+
+        while (!validInput) {
+            System.out.print("Enter a query number between 1 and " + queryCount + " inclusive," +
+                    " or 0 to quit: ");
+            userInput = scanner.nextLine();
+            try {
+                queryChoice = Integer.parseInt(userInput);
+                if (0 <= queryChoice && queryChoice <= queryCount) {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a number!");
             }
         }
- 
-    }    
+
+        return queryChoice;
+    }
 }
