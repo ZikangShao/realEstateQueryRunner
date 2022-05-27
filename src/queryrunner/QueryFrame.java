@@ -53,6 +53,7 @@ public class QueryFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        // database input
         jTextFieldDatabase = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -220,6 +221,18 @@ public class QueryFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String[] queryDes = {"Q1, list top 10 properties based on input states",
+            "Q2, Input deal status, closed or open returns average base salary, commission % and average commission of managers and realtors.",
+            "Q3, Input employee id and date, Show appointments",
+            "Q4, Property with max sold price",
+            "Q5, Property with min sold price",
+            "Q6, Show open deals of input property",
+            "Q7, Show sellers that have listed more than two properties",
+            "Q8, Salary information of current and past managers and realtors",
+            "Q9, Our customer age range",
+            "Q10, Input # of properties, returns states with more listed properties and average price",
+            "Q11, Average price of properties based on number of bedrooms",
+            "Q12, Top 3 employees ranked by total amount of sales"};
 
     
    /**
@@ -280,6 +293,9 @@ public class QueryFrame extends javax.swing.JFrame {
         System.out.println("choice is " + szChoice);
         this.jPanel2.setVisible(false);
 
+        // szChoice is in the format 'Query #', use the number to choose query descriptions
+        this.jTextArea2.setText(queryDes[Integer.parseInt(szChoice.substring(6)) - 1]);
+
         if (this.m_queryrunner.isParameterQuery(m_queryChoice))
         {           
             this.jPanel1.setVisible(true);                        
@@ -329,20 +345,6 @@ public class QueryFrame extends javax.swing.JFrame {
 
         boolean  bOK = true;
 
-        // add description of select query in the output box
-        this.jTextArea2.setText("Q1, list top 10 properties based on input states\n" +
-                                "Q2, Input deal status, closed or open returns average base salary, commission % and average commission of managers and realtors. \n" +
-                                "Q3, Input employee id and date, Show appointments \n" +
-                                "Q4, Property with max sold price \n" +
-                                "Q5, Property with min sold price \n" +
-                                "Q6, Show open deals of input property \n" +
-                                "Q7, Show sellers that have listed more than two properties \n" +
-                                "Q8, Salary information of current and past managers and realtors \n" +
-                                "Q9, Our customer age range \n" +
-                                "Q10, Input # of properties, returns states with more listed properties and average price \n" +
-                                "Q11, Average price of properties based on number of bedrooms \n" +
-                                "Q12, Top 3 employees ranked by total amount of sales");
-
         if (this.m_queryrunner.isParameterQuery(m_queryChoice))
         {
             parmstring = new String [nAmt];
@@ -390,7 +392,8 @@ public class QueryFrame extends javax.swing.JFrame {
             {
                 this.jTextArea2.setText(m_queryrunner.GetError());                
             }
-        }                
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
