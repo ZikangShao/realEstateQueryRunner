@@ -230,7 +230,7 @@ public class QueryFrame extends javax.swing.JFrame {
             "Q7, Show sellers that have listed more than two properties",
             "Q8, Salary information of current and past managers and realtors",
             "Q9, Our customer age range",
-            "Q10, Input # of properties, returns states with more listed properties and average price",
+            "Q10, Input # of listed properties, returns states with more listed properties than input and average price in that state",
             "Q11, Average price of properties based on number of bedrooms",
             "Q12, Top 3 employees ranked by total amount of sales",
             "Q13, Insert into deal table, Input Price ID, Property ID, Price and Deal ID",

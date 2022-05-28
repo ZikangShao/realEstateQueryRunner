@@ -60,7 +60,7 @@ public class QueryRunner {
                 "AND P.PROP_BATH > 2\n" +
                 "AND PROP_BATH > 1.5\n" +
                 "ORDER BY P.PROP_TARGET_PRICE DESC\n" +
-                "LIMIT 10;",new String [] {"STATE_NAME","STATE_NAME"},new boolean [] {false, false},false,true));
+                "LIMIT 10;",new String [] {"State 1","State 2"},new boolean [] {false, false},false,true));
 
         // Query 2  where DEALSTATUS = "CLOSED"
         // Average salary, comission percent, commision of working employees who closed a deal
@@ -78,7 +78,7 @@ public class QueryRunner {
                 "JOIN POSITION AS PS ON PS.POS_ID = EP.POS_ID\n" +
                 "WHERE E.EMPL_ENDDATE IS NULL\n" +
                 "GROUP BY PS.POS_TYPE\n" +
-                "ORDER BY PS.POS_TYPE;",new String [] {"DEAL_STATUS"},new boolean [] {false},false,true));
+                "ORDER BY PS.POS_TYPE;",new String [] {"Deal Status"},new boolean [] {false},false,true));
 
         // Query 3  where EMPLOYEE_ID = 24 and APPOINTMENT_DATE = "2022-05-16"
         // Employee id ranges 1-500
@@ -92,7 +92,7 @@ public class QueryRunner {
                 "JOIN PERSON AS P \n" +
                 "ON P.PERS_ID = A.PERS_ID\n" +
                 "WHERE E.EMPL_ID =? AND DATE(A.APP_DATE) =?\n" +
-                "ORDER BY APP_DATE;",new String [] {"EMPLOYEE_ID","APPOINTMENT_DATE"},new boolean [] {false, false},false,true));
+                "ORDER BY APP_DATE;",new String [] {"Employee ID (1-500)","Appointment date"},new boolean [] {false, false},false,true));
 
         // Query 4
         // PROPERTY WITH THE MAXIMUM SOLD PRICE
@@ -162,7 +162,7 @@ public class QueryRunner {
                 "ON LATEST_DEALS.DEAL_ID = P.DEAL_ID AND LATEST_DEALS.LATEST_PRICE = P.PRIC_DATE\n" +
                 "JOIN PERSON \n" +
                 "ON PERSON.PERS_ID = D.PERS_ID\n" +
-                "ORDER BY P.PRIC_PRICE DESC;",new String [] {"PROPERTY_ID"},new boolean [] {false},false,true));
+                "ORDER BY P.PRIC_PRICE DESC;",new String [] {"Property ID"},new boolean [] {false},false,true));
 
         // Query 7
         // Show sellers data who have listed 2 or more properties
@@ -220,7 +220,7 @@ public class QueryRunner {
                 "ON PROPERTY.ADDR_ID = ADDRESS.ADDR_ID) AS STATE\n" +
                 "ON PRICE.PROP_ID = STATE.PROP_ID\n" +
                 "GROUP BY ADDR_STATE\n" +
-                "HAVING COUNT(*) > ?;",new String [] {"NUM_OF_PROPERTIES"},new boolean [] {false},false,true));
+                "HAVING COUNT(*) > ?;",new String [] {"# of listed properties"},new boolean [] {false},false,true));
 
         // Query 11
         // Average property closing price by number of bedrooms
