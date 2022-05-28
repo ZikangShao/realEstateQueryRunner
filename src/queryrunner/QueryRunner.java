@@ -253,6 +253,32 @@ public class QueryRunner {
                 "ORDER BY SUM(PRIC_PRICE) DESC) AS EMP_TOTAL\n" +
                 "ON E.EMPL_ID = EMP_TOTAL.EMPL_ID\n" +
                 "LIMIT 3;",null,null,false,false));
+
+        // Query 13, Insert into deal table
+        /*
+        PRIC_ID int starting 770
+        PROP_ID int in a range 101-850
+        PRIC_PRICE double
+        PRIC_DATE in 2022-05-12 format (can we add a calendar or Today button?)
+        DEAL_ID is not a variable parameter and should be NULL
+        */
+        m_queryArray.add(new QueryData("INSERT INTO PRICE (PRIC_ID, PROP_ID, PRIC_PRICE, PRIC_DATE, DEAL_ID)\n" +
+                "VALUES (?, ?, ?, NOW(), ?);",
+                new String [] {"Price ID", "Property ID", "Price", "Deal ID"},
+                new boolean [] {false, false, false, false}, true, true));
+
+
+        // Query 14, update employee salary and commission
+        /*
+        EMPL_BASESALARY double
+        EMPL_COMISSION double in a range 0.00-0.10
+        EMPL_ID int in a range 1-500
+        */
+        m_queryArray.add(new QueryData("UPDATE EMPLOYEE\n" +
+                "SET EMPL_BASESALARY = ?, EMPL_COMISSION = ?\n" +
+                "WHERE EMPL_ID = ?;",
+                new String [] {"Base salary", "Commission", "Employee ID"},
+                new boolean [] {false, false, false}, true, true));
         
     }
        

@@ -232,7 +232,9 @@ public class QueryFrame extends javax.swing.JFrame {
             "Q9, Our customer age range",
             "Q10, Input # of properties, returns states with more listed properties and average price",
             "Q11, Average price of properties based on number of bedrooms",
-            "Q12, Top 3 employees ranked by total amount of sales"};
+            "Q12, Top 3 employees ranked by total amount of sales",
+            "Q13, Insert into deal table, Input Price ID, Property ID, Price and Deal ID",
+            "Q14, Update employee salary and commission, input new salary, commission and their ID"};
 
     
    /**
