@@ -405,14 +405,12 @@ public class QueryRunner {
     /**
      * @param args the command line arguments
      */
-    
-
-    
     public static void main(String[] args) {
         // TODO code application logic here
 
         final QueryRunner queryrunner = new QueryRunner();
-        
+
+        // GUI version
         if (args.length == 0)
         {
             java.awt.EventQueue.invokeLater(new Runnable() {
@@ -424,9 +422,10 @@ public class QueryRunner {
         }
         else
         {
+            // Console version
             if (args[0].equals ("-console"))
             {
-                String hostName, user, password, database;
+                String hostName, user, password, database; // stores user login details
                 Scanner keyboard = new Scanner(System.in);
 
                 System.out.print("Enter Hostname: ");
@@ -445,7 +444,10 @@ public class QueryRunner {
                     while (connected)
                     {
                         System.out.println('\n');
+                        // return the user query choice, -1 to enable array indexing
                         int queryChoice = getQueryInput(queryrunner.GetTotalQueries(), keyboard) - 1;
+                        // array index less than 0 is invalid, if for example user enters a query choice of 0
+                        // queries are numbered 1-n
                         if (queryChoice < 0)
                         {
                             queryrunner.Disconnect();
@@ -459,10 +461,10 @@ public class QueryRunner {
                                                 "***************");
 
                             System.out.println(queryrunner.GetQueryText(queryChoice));
-                            int queryParamAmount = queryrunner.GetParameterAmtForQuery(queryChoice);
-                            String [] parmstrings = {};
-                            String [] headers;
-                            String [][] allData;
+                            int queryParamAmount = queryrunner.GetParameterAmtForQuery(queryChoice); // each query has fixed param amount
+                            String [] parmstrings = {}; // stores user parameters
+                            String [] headers; // stores the headers of the return table
+                            String [][] allData; // stores the return fields of user query
                             if (queryrunner.isParameterQuery(queryChoice))
                             {
                                 parmstrings = new String [queryParamAmount];
@@ -473,12 +475,11 @@ public class QueryRunner {
                                     System.out.print("Enter Paramter for " + parameter + ": ");
                                     if (parameter.toLowerCase().contains("date"))
                                     {
-                                        System.out.println("lololololololo");
-                                        parmstrings[i] = getValidDateInput(keyboard);
+                                        parmstrings[i] = getValidDateInput(keyboard); // date input validation, use regex
                                     }
                                     else
                                     {
-                                        parmstrings[i] = keyboard.nextLine();
+                                        parmstrings[i] = keyboard.nextLine(); // get input as a string if its not a date parameter
                                     }
                                 }
                             }
@@ -491,7 +492,7 @@ public class QueryRunner {
                                 }
                                 else
                                 {
-                                    System.out.println(queryrunner.GetError());
+                                    System.out.println(queryrunner.GetError()); //output any error messages from the API calls to MYSQL
                                 }
                             }
                             else
@@ -531,6 +532,7 @@ public class QueryRunner {
                 }
                 else
                 {
+                    // If user login details is incorrect, output a message to the user
                     System.out.println("Failed to connect to " + database + " database!");
                 }
 
@@ -542,14 +544,16 @@ public class QueryRunner {
 
     public static int getQueryInput(int queryCount, Scanner scanner)
     {
-        String userInput;
-        int queryChoice = -1;
-        boolean validInput = false;
+        String userInput; // stores user input
+        int queryChoice = -1; // query choice assumed to be illegal
+        boolean validInput = false; // user input assumed to be illegal
 
         while (!validInput) {
             System.out.print("Enter a query number between 1 and " + queryCount + " inclusive," +
                     " or 0 to quit: ");
             userInput = scanner.nextLine();
+            // try to get a valid integer input from the user, output an error message if user
+            // doesn't enter an integer
             try {
                 queryChoice = Integer.parseInt(userInput);
                 if (0 <= queryChoice && queryChoice <= queryCount) {
@@ -563,8 +567,15 @@ public class QueryRunner {
         return queryChoice;
     }
 
+
+
+    /*
+     * Function will return a date that's in MYSQL format
+     *  @ return, string containing a date
+     */
     public static String getValidDateInput(Scanner scanner)
     {
+        // uses regex to make sure user input matches the required date format of MYSQL
         String userInput = null;
         boolean done = false;
         while (!done)
