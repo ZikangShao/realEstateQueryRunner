@@ -430,12 +430,16 @@ public class QueryRunner {
 
                 System.out.print("Enter Hostname: ");
                 hostName = keyboard.nextLine();
+                //hostName = "localhost";
                 System.out.print("Enter User: ");
                 user = keyboard.nextLine();
+                //user = "mm_cpsc502102team03";
                 System.out.print("Enter Password: ");
                 password = keyboard.nextLine();
+                //password = "mm_cpsc502102team03Pass-";
                 System.out.print("Enter Database: ");
                 database = keyboard.nextLine();
+                //database = "mm_cpsc502102team03";
 
                 boolean connected = queryrunner.Connect(hostName, user, password, database);
                 if (connected)
