@@ -221,20 +221,20 @@ public class QueryFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String[] queryDes = {"Q1, list top 10 properties based on input states",
-            "Q2, Input deal status, closed or open returns average base salary, commission % and average commission of managers and realtors.",
-            "Q3, Input employee id and date, Show appointments",
+    private String[] queryDes = {"Q1, lists top 10 properties based on input states.\nInput two states' abbreviation.",
+            "Q2, returns average base salary, commission % and average commission of managers and realtors based on deal status.\nInput deal status, closed or open.",
+            "Q3, Show appointments based on employee ID and date.\nInput employee id and date.",
             "Q4, Property with max sold price",
             "Q5, Property with min sold price",
-            "Q6, Show open deals of input property",
+            "Q6, Show open deals of input property.\nInput property ID.",
             "Q7, Show sellers that have listed more than two properties",
             "Q8, Salary information of current and past managers and realtors",
             "Q9, Our customer age range",
-            "Q10, Input # of listed properties, returns states with more listed properties than input and average price in that state",
+            "Q10, returns states with more listed properties than input and average price in that state.\nInput # of listed properties.",
             "Q11, Average price of properties based on number of bedrooms",
             "Q12, Top 3 employees ranked by total amount of sales",
-            "Q13, Insert into deal table, Input Price ID, Property ID, Price and Deal ID",
-            "Q14, Update employee salary and commission, input new salary, commission and their ID"};
+            "Q13, Insert into deal table.\nInput Price ID, Property ID, Price and Deal ID.",
+            "Q14, Update employee salary and commission.\nInput new salary, commission and their ID."};
 
     
    /**
