@@ -430,7 +430,7 @@ public class QueryRunner {
 
                 System.out.print("Enter Hostname: ");
                 hostName = keyboard.nextLine();
-                //hostName = "localhost";
+                //hostName = "cs100";
                 System.out.print("Enter User: ");
                 user = keyboard.nextLine();
                 //user = "mm_cpsc502102team03";
