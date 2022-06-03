@@ -278,7 +278,6 @@ public class QueryRunner {
                 new boolean [] {false, false, false}, true, true));
         
     }
-       
 
     public int GetTotalQueries()
     {
@@ -392,7 +391,26 @@ public class QueryRunner {
     {
         return m_error;
     }
- 
+
+    public final String[] GetQueryDes()
+    {
+        return queryDes;
+    }
+
+    private String[] queryDes = {"Q1, lists top 10 properties based on input states.\nInput two states' abbreviation.",
+            "Q2, returns average base salary, commission % and average commission of managers and realtors based on deal status.\nInput deal status, closed or open.",
+            "Q3, Show appointments based on employee ID and date.\nInput employee id and date.",
+            "Q4, Property with max sold price",
+            "Q5, Property with min sold price",
+            "Q6, Show open deals of input property.\nInput property ID.",
+            "Q7, Show sellers that have listed more than two properties",
+            "Q8, Salary information of current and past managers and realtors",
+            "Q9, Our customer age range",
+            "Q10, returns states with more listed properties than input and average price in that state.\nInput # of listed properties.",
+            "Q11, Average price of properties based on number of bedrooms",
+            "Q12, Top 3 employees ranked by total amount of sales",
+            "Q13, Insert into price table.\nInput Price ID, Property ID, Price and Deal ID.",
+            "Q14, Update employee salary and commission.\nInput new salary, commission and their ID."};
     private QueryJDBC m_jdbcData;
     private String m_error;    
     private String m_projectTeamApplication;
@@ -441,10 +459,17 @@ public class QueryRunner {
                 boolean connected = queryrunner.Connect(hostName, user, password, database);
                 if (connected)
                 {
-                    System.out.println("Connected to DataBase");
+                    System.out.println("\nConnected to DataBase");
                     while (connected)
                     {
                         System.out.println('\n');
+
+                        // Show all available queries to the user
+                        for (int i = 0; i < queryrunner.GetQueryDes().length; ++i)
+                        {
+                            System.out.print(i + 1);
+                            System.out.println(") " + queryrunner.GetQueryDes()[i] + '\n');
+                        }
                         // return the user query choice, -1 to enable array indexing
                         int queryChoice = getQueryInput(queryrunner.GetTotalQueries(), keyboard) - 1;
                         // array index less than 0 is invalid, if for example user enters a query choice of 0
@@ -461,7 +486,7 @@ public class QueryRunner {
                                                 "SELECTED QUERY\n" +
                                                 "***************");
 
-                            System.out.println(queryrunner.GetQueryText(queryChoice));
+                            System.out.println(queryrunner.GetQueryDes()[queryChoice]);
                             int queryParamAmount = queryrunner.GetParameterAmtForQuery(queryChoice); // each query has fixed param amount
                             String [] parmstrings = {}; // stores user parameters
                             String [] headers; // stores the headers of the return table
