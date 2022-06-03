@@ -221,6 +221,7 @@ public class QueryFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // queryDes is a 1d array containing the query descriptions for all of our 14 queries
     private String[] queryDes = {"Q1, lists top 10 properties based on input states.\nInput two states' abbreviation.",
             "Q2, returns average base salary, commission % and average commission of managers and realtors based on deal status.\nInput deal status, closed or open.",
             "Q3, Show appointments based on employee ID and date.\nInput employee id and date.",
@@ -233,7 +234,7 @@ public class QueryFrame extends javax.swing.JFrame {
             "Q10, returns states with more listed properties than input and average price in that state.\nInput # of listed properties.",
             "Q11, Average price of properties based on number of bedrooms",
             "Q12, Top 3 employees ranked by total amount of sales",
-            "Q13, Insert into deal table.\nInput Price ID, Property ID, Price and Deal ID.",
+            "Q13, Insert into price table.\nInput Price ID, Property ID, Price and Deal ID.",
             "Q14, Update employee salary and commission.\nInput new salary, commission and their ID."};
 
     

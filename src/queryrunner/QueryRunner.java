@@ -25,9 +25,6 @@ public class QueryRunner {
         m_updateAmount = 0;
         m_queryArray = new ArrayList<>();
         m_error="";
-    
-        
-        // TODO - You will need to change the queries below to match your queries.
         
         // You will need to put your Project Application in the below variable
         
@@ -459,7 +456,7 @@ public class QueryRunner {
                         }
                         else
                         {
-//                            String query = queryrunner.GetQueryText(queryChoice);
+//                          String query = queryrunner.GetQueryText(queryChoice);
                             System.out.println( "***************\n" +
                                                 "SELECTED QUERY\n" +
                                                 "***************");
